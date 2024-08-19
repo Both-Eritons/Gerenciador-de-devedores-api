@@ -1,6 +1,6 @@
 
-CREATE DATABASE IF NOT EXISTS devedores;
-use devedores;
+CREATE DATABASE IF NOT EXISTS dividas;
+use dividas;
 
 CREATE TABLE IF NOT EXISTS devedores(
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
