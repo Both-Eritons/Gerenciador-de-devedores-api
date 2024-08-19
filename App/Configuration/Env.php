@@ -13,7 +13,7 @@ class Env {
 
   static private array $env;
   
-  static function initial(): void {
+  static private function initial(): void {
     self::$env = array(
         "DB_USER" => $_ENV["DB_USER"],
         "DB_PASS" => $_ENV["DB_PASS"],
@@ -23,7 +23,7 @@ class Env {
     );
   }
 
-  function getEnv(?string $key = null) {
+  static function getEnv(?string $key = null) {
     if(!isset(self::initial())) self::initial();
     if(!$key) return self::$env;
     return self::$env[$key];
