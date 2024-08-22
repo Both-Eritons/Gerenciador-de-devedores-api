@@ -3,6 +3,7 @@
 namespace Api\Services\Devedor;
 
 use Api\Entities\Devedor\DevedorEntity;
+use App\Exception\Devedor\DevedorNotFound;
 use DevedorRepository;
 
 class DevedorService {
@@ -13,11 +14,11 @@ class DevedorService {
     $this->repo = $devRepo;
   }
 
-  function getDevedorById(int $id): DevedorEntity|null {
+  function getDevedorById(int $id): DevedorEntity|DevedorNotFound {
 
     $devedor = $this->repo->getDevedorById($id);
 
-    return $devedor ?? null;
+    return $devedor ?? throw new DevedorNotFound;
   }
 
 }
