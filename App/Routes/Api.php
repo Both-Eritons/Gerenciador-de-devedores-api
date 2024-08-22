@@ -2,20 +2,19 @@
 
 namespace App\Routes;
 
-use Slim\App;
+use App\Routes\DevedorRoutes;
 use Slim\Factory\AppFactory;
 
 class Api extends AppFactory {
- // private $user;
+ private $devedor;
   public $api;
   function __construct() {
     $this->api = self::create();
-
-    //$this->user = new UserRoutes();
+    $this->devedor = new DevedorRoutes();
   }
 
   private function routes() {
-    //$this->user->init($this->api);
+    $this->devedor->init($this->api);
   }
 
   function run() {

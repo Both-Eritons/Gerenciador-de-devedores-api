@@ -24,7 +24,7 @@ class Env {
   }
 
   static function getEnv(?string $key = null) {
-    if(!isset(self::initial())) self::initial();
+    if(!isset(self::$env)) self::initial();
     if(!$key) return self::$env;
     return self::$env[$key];
   }

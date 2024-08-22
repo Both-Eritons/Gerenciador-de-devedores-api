@@ -9,22 +9,25 @@ use Psr\Http\Message\ResponseInterface as R;
 final class Response
 {
 
-  private ?array $arr;
-  function __construct(R $res, string $msg = '', int $code = 200, ?array $more = null): R
+  static private ?array $arr;
+  private function __construct() {}
+
+  static function json(R $res, string $msg = '', int $code = 200, ?array $more = null): R
   {
+
     $zone = new DateTimeZone('America/Sao_Paulo');
     $zone = new DateTime('now', $zone);
-    $this->arr = array(
+    self::$arr = array(
       "message" => $msg,
       "http_code" => $code,
       "date" => $zone->format('d-m-yy h:i:s')
     );
 
     if (!is_null($more)) {
-      $this->arr["more"] = $more;
+      self::$arr["more"] = $more;
     }
 
-    $json = json_encode($this->arr, JSON_PRETTY_PRINT);
+    $json = json_encode(self::$arr, JSON_PRETTY_PRINT);
 
     $res->getBody()->write($json);
 

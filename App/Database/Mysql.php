@@ -8,7 +8,7 @@ use PDOException;
 
 class Mysql extends PDO{
 
-  static private PDO $sql;
+  static private $sql;
   function __construct()
   {
     try {
@@ -22,7 +22,7 @@ class Mysql extends PDO{
         ]
       ); 
     } catch(PDOException $e) {
-     echo "PDO ERROR: ".$e->getMessage();
+     echo "PDO ERROR: ".$e->getMessage();die;
     }
   }
 
