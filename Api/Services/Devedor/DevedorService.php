@@ -2,6 +2,7 @@
 
 namespace Api\Services\Devedor;
 
+use Api\Entities\Devedor\DevedorEntity;
 use DevedorRepository;
 
 class DevedorService {
@@ -12,6 +13,11 @@ class DevedorService {
     $this->repo = $devRepo;
   }
 
+  function getDevedorById(int $id): DevedorEntity|null {
 
+    $devedor = $this->repo->getDevedorById($id);
+
+    return $devedor ?? null;
+  }
 
 }
