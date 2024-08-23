@@ -4,11 +4,12 @@ namespace Api\Models\Devedor;
 
 use DateTime;
 
-class DevedorModel {
+class DevedorModel
+{
   public ?int $id = null;
   public string $nome;
-  public ?string $email;
-  public ?string $telefone;
-  public ?string $apelido;
-  public ?DateTime $dataRegistro;
+  public ?string $email = null;
+  public ?string $telefone = null;
+  public ?string $apelido = null;
+  public ?DateTime $dataRegistro = null;
 }
