@@ -3,6 +3,7 @@
 namespace Api\Repositories\Devedor;
 
 use Api\Entities\Devedor\DevedorEntity;
+use Api\Models\Devedor\DevedorModel;
 use App\Database\Mysql;
 use App\Interface\Repository\RepositoryInterface as IRepo;
 
@@ -19,6 +20,20 @@ class DevedorRepository implements IRepo {
     $qr = "SELECT * FROM $this->table WHERE id = :id";
     $stmt = $this->sql->prepare($qr);
     $stmt->execute([":id"=> $id]);
+
+    $row = $stmt->fetchObject($this->model);
+
+    if($row) return new DevedorEntity($row);
+    return null;
+  }
+
+  function createDevedor(DevedorModel $devedor): ?DevedorEntity{
+    $qr = "INSERT INTO $this->table(nome, email, apelido) VALUES(:nome, :email, :apelido)";
+    $stmt = $this->sql->prepare($qr);
+    $stmt->bindParam(":nome", $devedor->nome);
+    $stmt->bindParam(":email", $devedor->email);
+    $stmt->bindParam(":apelido", $devedor->apelido);
+    $stmt->execute();
 
     $row = $stmt->fetchObject($this->model);
 
