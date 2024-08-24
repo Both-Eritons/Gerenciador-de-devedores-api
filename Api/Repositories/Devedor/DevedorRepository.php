@@ -27,6 +27,18 @@ class DevedorRepository implements IRepo {
     return null;
   }
 
+  function getDevedorByNome(string $nome) {
+    $qr = "SELECT * FROM $this->table WHERE nome = :nome";
+    $stmt = $this->sql->prepare($qr);
+    $stmt->execute([":nome"=> $nome]);
+
+    $row = $stmt->fetchObject($this->model);
+
+    if($row) return new DevedorEntity($row);
+    return null;
+
+  }
+
   function createDevedor(DevedorModel $devedor): ?DevedorEntity{
     $qr = "INSERT INTO $this->table(nome, email,telefone, apelido) VALUES(:nome, :email,:telefone, :apelido)";
     $stmt = $this->sql->prepare($qr);
