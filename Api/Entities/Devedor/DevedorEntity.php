@@ -93,4 +93,14 @@ class DevedorEntity
     );
     return $array;
   }
+
+  function toModel(): DevedorModel{
+    $model = new DevedorModel();
+    foreach(get_object_vars($this) as $prop => $def) {
+      if(!array_key_exists($prop, $this->toArray())) continue;
+
+      $model->{$prop} = $this->toArray()[$prop];
+    }
+    return $model;
+  }
 }
