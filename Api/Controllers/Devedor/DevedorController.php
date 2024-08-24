@@ -66,9 +66,9 @@ class DevedorController {
       $model->email = $body?->email;
       $model->telefone = $body?->telefone;
 
-      $re = $devedor->execute($model)->toArray();
+      $devedor->execute($model)->toArray();
 
-      return Response::json($res, MSG::CREATE_SUCCESS, Code::CREATED,$re);
+      return Response::json($res, MSG::CREATE_SUCCESS, Code::CREATED);
     } catch (DevedorException $e) {
       return Response::json($res, $e->getMessage(), $e->getCode());
     }

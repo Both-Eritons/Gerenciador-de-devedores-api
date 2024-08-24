@@ -11,7 +11,7 @@ class FindDevedorByNomeAction {
   function __construct(protected DevedorRepository $repo){}
 
   function execute(string $nome): DevedorEntity{
-    $devedor = $this->repo->getDevedorById($nome);
+    $devedor = $this->repo->getDevedorByNome($nome);
 
     return $devedor ?? throw new DevedorNotFound();
   }
