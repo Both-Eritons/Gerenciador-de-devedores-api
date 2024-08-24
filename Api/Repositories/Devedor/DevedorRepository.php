@@ -28,10 +28,11 @@ class DevedorRepository implements IRepo {
   }
 
   function createDevedor(DevedorModel $devedor): ?DevedorEntity{
-    $qr = "INSERT INTO $this->table(nome, email, apelido) VALUES(:nome, :email, :apelido)";
+    $qr = "INSERT INTO $this->table(nome, email,telefone, apelido) VALUES(:nome, :email,:telefone, :apelido)";
     $stmt = $this->sql->prepare($qr);
     $stmt->bindParam(":nome", $devedor->nome);
     $stmt->bindParam(":email", $devedor->email);
+    $stmt->bindParam(":telefone", $devedor->telefone);
     $stmt->bindParam(":apelido", $devedor->apelido);
     
     if($stmt->execute()) {

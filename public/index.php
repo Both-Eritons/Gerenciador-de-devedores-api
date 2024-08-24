@@ -1,5 +1,5 @@
 <?php
-
+header('Content-Type: application/json; charset=utf-8');
 use App\Configuration\Slim;
 use App\Routes\Api;
 

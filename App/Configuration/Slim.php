@@ -15,7 +15,7 @@ class Slim{
       $res = $app->getResponseFactory()->createResponse(404);
 
       $json = array(
-        "message" => "rota nao encontrada",
+        "message" => "rota não encontrada",
         "httpCode" => $res->getStatusCode()
       );
       $json  = json_encode($json, JSON_PRETTY_PRINT);

@@ -8,6 +8,6 @@ class DevedorNotFound extends Exception{
 
   function __construct()
   {
-    parent::__construct("devedor nao foi encontrado!!!", 404);
+    parent::__construct("Devedor não foi Encontrado!", 404);
   }
 }

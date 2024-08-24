@@ -7,6 +7,6 @@ use Exception;
 class EntityPropertyNotFound extends Exception {
   function __construct()
   {
-    parent::__construct("esta propriedade nao existe", 404);
+    parent::__construct("esta propriedade não existe", 404);
   }
 }
