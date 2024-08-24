@@ -4,6 +4,7 @@ namespace Api\Controllers\Devedor;
 
 use Api\Actions\Devedor\CreateDevedorAction as DevedorCreateDevedorAction;
 use Api\Actions\Devedor\FindDevedorByIdAction;
+use Api\Actions\Devedor\FindDevedorByNomeAction;
 use Api\Models\Devedor\DevedorModel;
 use Api\Repositories\Devedor\DevedorRepository;
 use App\Constant\Devedor\Messages as MSG;
@@ -11,7 +12,6 @@ use App\Constant\Http\Code;
 use App\Exception\Devedor\DevedorException;
 use App\Exception\Devedor\DevedorNotFound;
 use App\Helper\Response;
-use CreateDevedorAction;
 use Psr\Http\Message\ResponseInterface as Res;
 use Slim\Psr7\Request as Req;
 
@@ -30,12 +30,28 @@ class DevedorController {
       $devedor = new FindDevedorByIdAction($this->repo);
       $dev = $devedor->execute($id)->toArray();
 
-      return Response::json($res, "Usuario Encontrado", 200, $dev);
+      return Response::json($res, "Usuario Encontrado", Code::OK, $dev);
 
     } catch (DevedorNotFound $e) {
       return Response::json($res, $e->getMessage(), $e->getCode());
     }
   }
+
+  function getDevedorByNome(Req $req, Res $res, array $args): Res {
+    try {
+
+      $id = (string) $args["nome"];
+
+      $devedor = new FindDevedorByNomeAction($this->repo);
+      $dev = $devedor->execute($id)->toArray();
+
+      return Response::json($res, "Usuario Encontrado", Code::OK, $dev);
+
+    } catch (DevedorNotFound $e) {
+      return Response::json($res, $e->getMessage(), $e->getCode());
+    }
+  }
+
 
   function createDevedor(Req $req, Res $res): Res {
     try {
