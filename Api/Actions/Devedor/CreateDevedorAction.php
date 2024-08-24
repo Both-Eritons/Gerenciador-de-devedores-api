@@ -1,5 +1,7 @@
 <?php
 
+namespace Api\Actions\Devedor;
+
 use Api\Entities\Devedor\DevedorEntity;
 use Api\Models\Devedor\DevedorModel;
 use Api\Repositories\Devedor\DevedorRepository;
@@ -18,7 +20,7 @@ class CreateDevedorAction {
 
     $devedor = $this->repo->createDevedor($params);
 
-    if(is_null($devedor)) return throw new DevedorException();
+    if(!$devedor) return throw new DevedorException();
 
     return new DevedorEntity($params);
   }

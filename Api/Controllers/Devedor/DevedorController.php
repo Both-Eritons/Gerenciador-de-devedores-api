@@ -2,11 +2,16 @@
 
 namespace Api\Controllers\Devedor;
 
+use Api\Actions\Devedor\CreateDevedorAction as DevedorCreateDevedorAction;
 use Api\Actions\Devedor\FindDevedorByIdAction;
+use Api\Models\Devedor\DevedorModel;
 use Api\Repositories\Devedor\DevedorRepository;
-use Api\Services\Devedor\DevedorService;
+use App\Constant\Devedor\Messages as MSG;
+use App\Constant\Http\Code;
+use App\Exception\Devedor\DevedorException;
 use App\Exception\Devedor\DevedorNotFound;
 use App\Helper\Response;
+use CreateDevedorAction;
 use Psr\Http\Message\ResponseInterface as Res;
 use Slim\Psr7\Request as Req;
 
@@ -34,8 +39,21 @@ class DevedorController {
 
   function createDevedor(Req $req, Res $res): Res {
     try {
-      
-    } catch (\Throwable $e) {
+      $body = $req->getBody();
+      $body = json_decode($body);
+
+      $devedor = new DevedorCreateDevedorAction($this->repo);
+
+      $model = new DevedorModel();
+      $model->nome = $body?->nome;
+      $model->apelido = $body?->apelido;
+      $model->email = $body?->email;
+      $model->telefone = $body?->telefone;
+
+      $re = $devedor->execute($model)->toArray();
+
+      return Response::json($res, MSG::CREATE_SUCCESS, Code::CREATED,$re);
+    } catch (DevedorException $e) {
       return Response::json($res, $e->getMessage(), $e->getCode());
     }
   }
