@@ -33,10 +33,10 @@ class DevedorRepository implements IRepo {
     $stmt->bindParam(":nome", $devedor->nome);
     $stmt->bindParam(":email", $devedor->email);
     $stmt->bindParam(":apelido", $devedor->apelido);
-    $stmt->execute();
-
-    $row = $stmt->fetchObject($this->model);
-
+    
+    if($stmt->execute()) {
+      $row = $this->getDevedorById($this->sql->lastInsertId())->toModel();
+    }
     if($row) return new DevedorEntity($row);
     return null;
   }
