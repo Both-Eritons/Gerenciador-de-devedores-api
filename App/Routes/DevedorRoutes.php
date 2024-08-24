@@ -18,6 +18,9 @@ class DevedorRoutes{
       return $this->devedor->getDevedorById($rq, $rs, $as);
     });
 
+    $app->get("/api/devedor/find/nome/{nome}", function ($rq, $rs, $as) {
+      return $this->devedor->getDevedorByNome($rq, $rs, $as);
+    });
 
     $app->post("/api/devedor/create", function ($rq, $rs) {
       return $this->devedor->createDevedor($rq, $rs);
